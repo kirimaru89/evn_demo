@@ -37,11 +37,13 @@ export function AppShell({
           gap: 20
         }}
       >
-        <div>
+        <div data-shell-brand>
           <div style={{ fontFamily: "Lexend, sans-serif", fontSize: 22, fontWeight: 700 }}>MSM</div>
-          <div style={{ marginTop: 8, fontSize: 13, color: "rgba(255,255,255,.72)" }}>Hệ thống quản lý đa dịch vụ</div>
+          <div data-shell-brand-copy style={{ marginTop: 8, fontSize: 13, color: "rgba(255,255,255,.72)" }}>
+            Hệ thống quản lý đa dịch vụ
+          </div>
         </div>
-        <nav style={{ display: "grid", gap: 8 }}>
+        <nav data-shell-nav style={{ display: "grid", gap: 8 }}>
           {appModules.map((module) => (
             <Link
               key={module.name}
@@ -55,7 +57,9 @@ export function AppShell({
               }}
             >
               <div style={{ fontWeight: 700 }}>{module.name}</div>
-              <div style={{ marginTop: 4, fontSize: 12, color: "rgba(255,255,255,.7)" }}>{module.description}</div>
+              <div data-shell-nav-copy style={{ marginTop: 4, fontSize: 12, color: "rgba(255,255,255,.7)" }}>
+                {module.description}
+              </div>
             </Link>
           ))}
         </nav>
