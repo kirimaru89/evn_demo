@@ -24,8 +24,9 @@ export function AppShell({
   }
 
   return (
-    <div style={{ minHeight: "100vh", display: "grid", gridTemplateColumns: "var(--sidebar-width) minmax(0, 1fr)" }}>
+    <div data-shell-root style={{ minHeight: "100vh", display: "grid", gridTemplateColumns: "var(--sidebar-width) minmax(0, 1fr)" }}>
       <aside
+        data-shell-sidebar
         style={{
           borderRight: "1px solid rgba(148,163,184,.2)",
           background: "linear-gradient(180deg, #0f172a 0%, #172554 100%)",
@@ -62,6 +63,7 @@ export function AppShell({
 
       <div style={{ minWidth: 0 }}>
         <header
+          data-shell-header
           style={{
             height: "var(--topbar-height)",
             display: "flex",
@@ -77,12 +79,10 @@ export function AppShell({
           }}
         >
           <div>
-            <div style={{ fontSize: 12, color: "var(--color-text-soft)", textTransform: "uppercase", fontWeight: 700 }}>
-              Enterprise Gateway
-            </div>
+            <div style={{ fontSize: 12, color: "var(--color-text-soft)", textTransform: "uppercase", fontWeight: 700 }}>Enterprise Gateway</div>
             <div style={{ fontFamily: "Lexend, sans-serif", fontSize: 18, fontWeight: 600 }}>{title}</div>
           </div>
-          <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+          <div data-shell-user style={{ display: "flex", gap: 12, alignItems: "center" }}>
             <Card style={{ padding: "8px 12px", background: "#eff6ff", color: "#1d4ed8" }}>Nguyễn Đức Minh</Card>
             <Link href="/login" style={{ fontWeight: 600, color: "var(--color-primary-700)" }}>
               Đăng xuất
@@ -90,7 +90,9 @@ export function AppShell({
           </div>
         </header>
 
-        <main style={{ padding: 24, display: "grid", gap: 20 }}>{children}</main>
+        <main data-shell-main style={{ padding: 24, display: "grid", gap: 20 }}>
+          {children}
+        </main>
       </div>
     </div>
   );
