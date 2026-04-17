@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { AppShell } from "@/components/app-shell";
+import { Breadcrumbs } from "@/components/page-header";
 import { Card } from "@/components/ui/card";
+import { ModuleTabs } from "@/components/ui/module-tabs";
 import { Field, Select } from "@/components/ui/field";
 import { FilterToolbar } from "@/components/filter-toolbar";
 import { Button } from "@/components/ui/button";
@@ -330,76 +332,9 @@ export default function HomePage() {
   return (
     <AppShell title="Dashboard Portal MSM" subtitle="MSM-01 .. MSM-05. Dashboard tổng quan và dashboard chuyên sâu theo từng phân hệ.">
       <div style={{ display: "grid", gap: 18 }}>
-        <Card
-          style={{
-            padding: 24,
-            background: "linear-gradient(135deg, #0f172a 0%, #1e293b 48%, #1d4ed8 100%)",
-            color: "#f8fafc",
-            overflow: "hidden",
-            position: "relative"
-          }}
-        >
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: "radial-gradient(circle at top right, rgba(34,197,94,.22), transparent 28%), radial-gradient(circle at bottom left, rgba(96,165,250,.28), transparent 26%)"
-            }}
-          />
-          <div style={{ position: "relative", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 20 }}>
-            <div style={{ display: "grid", gap: 14 }}>
-              <div style={{ fontSize: 12, letterSpacing: ".08em", textTransform: "uppercase", color: "rgba(248,250,252,.72)", fontWeight: 700 }}>Enterprise Gateway</div>
-              <div style={{ fontFamily: "'Fira Code', monospace", fontSize: 32, fontWeight: 700, lineHeight: 1.2 }}>Dashboard điều hành đa phân hệ MSM</div>
-              <div style={{ maxWidth: 720, color: "rgba(248,250,252,.78)", fontSize: 15, lineHeight: 1.7 }}>
-                Theo dõi tức thời doanh thu, kế hoạch, tiến độ, hồ sơ chờ duyệt và chất lượng vận hành giữa các phân hệ
-                `TN Doanh thu`, `SCL MBA`, `CBM`, `TVTK`.
-              </div>
-              <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 6 }}>
-                {dashboardSections.map((section) => {
-                  const active = section.id === tab;
-                  return (
-                    <button
-                      key={section.id}
-                      type="button"
-                      onClick={() => setTab(section.id)}
-                      style={{
-                        borderRadius: 999,
-                        border: active ? "1px solid rgba(255,255,255,.48)" : "1px solid rgba(255,255,255,.16)",
-                        background: active ? "rgba(255,255,255,.16)" : "rgba(15,23,42,.24)",
-                        color: "#f8fafc",
-                        padding: "10px 14px",
-                        fontWeight: 700,
-                        cursor: "pointer"
-                      }}
-                    >
-                      {section.code} · {section.title}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-            <Card style={{ padding: 18, background: "rgba(255,255,255,.08)", border: "1px solid rgba(255,255,255,.14)", boxShadow: "none" }}>
-              <div style={{ display: "grid", gap: 12 }}>
-                <div style={{ fontFamily: "'Fira Code', monospace", fontWeight: 700 }}>Bộ lọc đang áp dụng</div>
-                <div style={{ display: "grid", gap: 10 }}>
-                  {[
-                    ["Năm", appliedFilters.year],
-                    ["Kỳ", appliedFilters.period],
-                    ["Đơn vị", appliedFilters.unit],
-                    [extraLabel === "Đơn vị" ? "Bộ lọc bổ sung" : extraLabel, appliedFilters.extra]
-                  ].map(([label, value], index) => (
-                    <div key={`${label}-${index}`} style={{ display: "flex", justifyContent: "space-between", gap: 12, fontSize: 14 }}>
-                      <span style={{ color: "rgba(248,250,252,.68)" }}>{label}</span>
-                      <strong>{value}</strong>
-                    </div>
-                  ))}
-                </div>
-                <div style={{ height: 1, background: "rgba(255,255,255,.12)" }} />
-                <div style={{ color: "rgba(248,250,252,.72)", fontSize: 13 }}>Dữ liệu trên dashboard được mô phỏng theo spec `Dashboard_MSM.md` và các phân hệ hiện có trong app.</div>
-              </div>
-            </Card>
-          </div>
-        </Card>
+        <Breadcrumbs items={["Home", "Dashboard Portal MSM"]} />
+
+        <ModuleTabs items={dashboardSections.map((section) => ({ key: section.id, label: `${section.code} · ${section.title}`, active: section.id === tab, onClick: () => setTab(section.id) }))} />
 
         <FilterToolbar>
           <Field label="Năm">
@@ -460,29 +395,56 @@ export default function HomePage() {
           ))}
         </div>
 
-        <Card style={{ padding: 20, display: "grid", gap: 14, background: "linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)" }}>
+        <Card style={{ padding: 18, display: "grid", gap: 12, background: "linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)" }}>
           <div>
             <div style={{ fontFamily: "'Fira Code', monospace", fontWeight: 700, color: "#0f172a" }}>Truy cập nhanh phân hệ</div>
-            <div style={{ color: "var(--color-text-muted)", fontSize: 14, marginTop: 4 }}>Đi thẳng tới màn nghiệp vụ từ portal dashboard.</div>
+            <div style={{ color: "var(--color-text-muted)", fontSize: 14, marginTop: 4 }}>Rút gọn lối vào báo cáo và màn nghiệp vụ theo từng phân hệ.</div>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 12 }}>
+          <div style={{ display: "grid", gap: 10 }}>
             {appModules.map((module) => (
               <Link
                 key={module.name}
                 href={module.disabled ? "#" : module.href}
                 style={{
-                  padding: 16,
-                  borderRadius: "var(--radius-lg)",
+                  padding: "12px 14px",
+                  borderRadius: "var(--radius-md)",
                   border: "1px solid rgba(148,163,184,.22)",
                   background: module.disabled ? "#f8fafc" : "#fff",
                   color: "inherit",
                   opacity: module.disabled ? 0.7 : 1,
                   display: "grid",
-                  gap: 8
+                  gridTemplateColumns: "minmax(0, 1fr) auto",
+                  gap: 12,
+                  alignItems: "center"
                 }}
               >
-                <div style={{ fontWeight: 700, color: "#0f172a" }}>{module.name}</div>
-                <div style={{ color: "var(--color-text-muted)", fontSize: 14 }}>{module.description}</div>
+                <div style={{ display: "grid", gap: 2, minWidth: 0 }}>
+                  <div style={{ fontWeight: 700, color: "#0f172a" }}>{module.name}</div>
+                  <div
+                    style={{
+                      color: "var(--color-text-muted)",
+                      fontSize: 13,
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis"
+                    }}
+                  >
+                    {module.description}
+                  </div>
+                </div>
+                <span
+                  style={{
+                    padding: "8px 12px",
+                    borderRadius: 999,
+                    background: module.disabled ? "rgba(148,163,184,.12)" : "var(--color-primary-50)",
+                    color: module.disabled ? "var(--color-text-soft)" : "var(--color-primary-700)",
+                    border: module.disabled ? "1px solid rgba(148,163,184,.12)" : "1px solid rgba(37,99,235,.16)",
+                    fontSize: 13,
+                    fontWeight: 700
+                  }}
+                >
+                  Mở report
+                </span>
               </Link>
             ))}
           </div>

@@ -10,6 +10,7 @@ import { Card } from "@/components/ui/card";
 import { Field, Input, Select, Textarea } from "@/components/ui/field";
 import { ConfirmModal, DetailList, ModalFrame } from "@/components/ui/modal";
 import { PaginationBar, usePagination } from "@/components/ui/pagination";
+import { ActionIconButton, ActionIconLink, TableActionGroup } from "@/components/ui/action-icons";
 import { DataTable } from "@/components/ui/table";
 import { StatusBadge } from "@/components/admin/status";
 import {
@@ -622,23 +623,17 @@ export function TvtkListView({ sectionSlug }: { sectionSlug: string }) {
         columns={getListColumns(section)}
         actions="Thao tác"
         actionCells={pageRows.map((record) => (
-          <div key={record.id} style={{ display: "flex", gap: 8, justifyContent: "flex-end", flexWrap: "wrap" }}>
+          <TableActionGroup key={record.id}>
             {section.detailCode ? (
-              <ButtonLink href={`/tvtk/${section.slug}/${record.id}`} variant="secondary">
-                Xem chi tiết
-              </ButtonLink>
+              <ActionIconLink href={`/tvtk/${section.slug}/${record.id}`} icon="view" label="Xem chi tiết" />
             ) : null}
             {!section.readOnly && section.editCode ? (
-              <ButtonLink href={`/tvtk/${section.slug}/${record.id}/edit`} variant="secondary">
-                Chỉnh sửa
-              </ButtonLink>
+              <ActionIconLink href={`/tvtk/${section.slug}/${record.id}/edit`} icon="edit" label="Chỉnh sửa" />
             ) : null}
             {!section.readOnly && section.deleteCode ? (
-              <Button variant="danger" onClick={() => setDeleteRecordId(record.id)}>
-                Xóa
-              </Button>
+              <ActionIconButton icon="delete" tone="danger" label="Xóa" onClick={() => setDeleteRecordId(record.id)} />
             ) : null}
-          </div>
+          </TableActionGroup>
         ))}
         rows={pageRows.map((record) => getListRow(section, record))}
       />

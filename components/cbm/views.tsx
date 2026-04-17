@@ -10,6 +10,7 @@ import { Card } from "@/components/ui/card";
 import { Field, Input, Select, Textarea } from "@/components/ui/field";
 import { ConfirmModal, DetailList } from "@/components/ui/modal";
 import { PaginationBar, usePagination } from "@/components/ui/pagination";
+import { ActionIconButton, ActionIconLink, TableActionGroup } from "@/components/ui/action-icons";
 import { DataTable } from "@/components/ui/table";
 import { StatusBadge } from "@/components/admin/status";
 import {
@@ -151,17 +152,11 @@ export function CbmListView({ sectionSlug }: { sectionSlug: string }) {
         columns={["Mã", "Tên hồ sơ", "Thiết bị", "Đơn vị thực hiện", "Ngày thực hiện", "Trạng thái"]}
         actions="Thao tác"
         actionCells={pageRows.map((record) => (
-          <div key={record.id} style={{ display: "flex", gap: 8, justifyContent: "flex-end", flexWrap: "wrap" }}>
-            <ButtonLink href={`/cbm/${section.slug}/${record.id}`} variant="secondary">
-              Xem chi tiết
-            </ButtonLink>
-            <ButtonLink href={`/cbm/${section.slug}/${record.id}/edit`} variant="secondary">
-              Chỉnh sửa
-            </ButtonLink>
-            <Button variant="danger" onClick={() => setDeleteRecordId(record.id)}>
-              Xóa
-            </Button>
-          </div>
+          <TableActionGroup key={record.id}>
+            <ActionIconLink href={`/cbm/${section.slug}/${record.id}`} icon="view" label="Xem chi tiết" />
+            <ActionIconLink href={`/cbm/${section.slug}/${record.id}/edit`} icon="edit" label="Chỉnh sửa" />
+            <ActionIconButton icon="delete" tone="danger" label="Xóa" onClick={() => setDeleteRecordId(record.id)} />
+          </TableActionGroup>
         ))}
         rows={pageRows.map((record) => [
           <strong key="code">{record.code}</strong>,

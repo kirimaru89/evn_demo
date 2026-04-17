@@ -25,6 +25,7 @@ import { Card } from "@/components/ui/card";
 import { Field, Input, Select, Textarea } from "@/components/ui/field";
 import { ConfirmModal, DetailList } from "@/components/ui/modal";
 import { PaginationBar, usePagination } from "@/components/ui/pagination";
+import { ActionIconButton, ActionIconLink, TableActionGroup } from "@/components/ui/action-icons";
 import { DataTable } from "@/components/ui/table";
 
 function Stack({ children }: { children: ReactNode }) {
@@ -94,18 +95,14 @@ export function UsersListView() {
         columns={["Mã", "Tên / mô tả", "Đơn vị", "Ngày tạo", "Trạng thái"]}
         actions="Thao tác"
         actionCells={pageRows.map((record) => (
-          <div key={record.id} style={{ display: "flex", gap: 8, justifyContent: "flex-end", flexWrap: "wrap" }}>
-            <ButtonLink href={`/admin/users/${record.id}/edit`} variant="secondary">
-              Chỉnh sửa
-            </ButtonLink>
-            <button
-              type="button"
+          <TableActionGroup key={record.id}>
+            <ActionIconLink href={`/admin/users/${record.id}/edit`} icon="edit" label="Chỉnh sửa" />
+            <ActionIconButton
+              icon="toggle"
+              label={record.status === "Vô hiệu hóa" ? "Kích hoạt" : "Vô hiệu hóa"}
               onClick={() => setModalUser(record.id)}
-              style={{ border: "none", background: "transparent", color: "var(--color-primary-700)", fontWeight: 700 }}
-            >
-              {record.status === "Vô hiệu hóa" ? "Kích hoạt" : "Vô hiệu hóa"}
-            </button>
-          </div>
+            />
+          </TableActionGroup>
         ))}
         rows={pageRows.map((record) => [
           <strong key="code">{record.code}</strong>,
@@ -206,14 +203,10 @@ export function RolesListView() {
         columns={["Mã", "Tên / mô tả", "Đơn vị", "Ngày tạo", "Trạng thái"]}
         actions="Thao tác"
         actionCells={pageRows.map((record) => (
-          <div key={record.id} style={{ display: "flex", gap: 8, justifyContent: "flex-end", flexWrap: "wrap" }}>
-            <ButtonLink href={`/admin/roles/${record.id}/edit`} variant="secondary">
-              Chỉnh sửa
-            </ButtonLink>
-            <Button variant="danger" onClick={() => setModalRole(record.id)}>
-              Xóa
-            </Button>
-          </div>
+          <TableActionGroup key={record.id}>
+            <ActionIconLink href={`/admin/roles/${record.id}/edit`} icon="edit" label="Chỉnh sửa" />
+            <ActionIconButton icon="delete" tone="danger" label="Xóa" onClick={() => setModalRole(record.id)} />
+          </TableActionGroup>
         ))}
         rows={pageRows.map((record) => [
           <strong key="code">{record.code}</strong>,
@@ -318,11 +311,9 @@ function SimpleCatalogList({ mode }: { mode: SimpleMode }) {
         columns={["Mã", "Tên / mô tả", "Đơn vị", "Ngày tạo", "Trạng thái"]}
         actions="Thao tác"
         actionCells={pageRows.map((record) => (
-          <div key={record.id} style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}>
-            <ButtonLink href={`${base}/${record.id}/edit`} variant="secondary">
-              Chỉnh sửa
-            </ButtonLink>
-          </div>
+          <TableActionGroup key={record.id}>
+            <ActionIconLink href={`${base}/${record.id}/edit`} icon="edit" label="Chỉnh sửa" />
+          </TableActionGroup>
         ))}
         rows={pageRows.map((record) => [
           <strong key="code">{record.code}</strong>,
@@ -406,11 +397,9 @@ export function AuditLogsListView() {
         columns={["Hành động", "Người thực hiện", "Phân hệ", "Đối tượng", "Thời gian", "Trạng thái"]}
         actions="Thao tác"
         actionCells={pageRows.map((record) => (
-          <div key={record.id} style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}>
-            <ButtonLink href={`/admin/audit-logs/${record.id}`} variant="secondary">
-              Xem chi tiết
-            </ButtonLink>
-          </div>
+          <TableActionGroup key={record.id}>
+            <ActionIconLink href={`/admin/audit-logs/${record.id}`} icon="view" label="Xem chi tiết" />
+          </TableActionGroup>
         ))}
         rows={pageRows.map((record) => [
           record.action,

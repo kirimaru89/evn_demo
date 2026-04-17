@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/card";
 import { Field, Input, Select, Textarea } from "@/components/ui/field";
 import { ConfirmModal, DetailList } from "@/components/ui/modal";
 import { PaginationBar, usePagination } from "@/components/ui/pagination";
+import { ActionIconButton, ActionIconLink, TableActionGroup } from "@/components/ui/action-icons";
 import { DataTable } from "@/components/ui/table";
 import { StatusBadge } from "@/components/admin/status";
 import {
@@ -127,16 +128,12 @@ function actionButtons(section: MbaSection, record: MbaRecord) {
   const base = `/mba/${section.slug}/${record.id}`;
 
   return (
-    <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-      <ButtonLink href={base} variant="secondary">
-        Xem chi tiết
-      </ButtonLink>
+    <>
+      <ActionIconLink href={base} icon="view" label="Xem chi tiết" />
       {section.editCode !== section.detailCode ? (
-        <ButtonLink href={`${base}/edit`} variant="secondary">
-          Chỉnh sửa
-        </ButtonLink>
+        <ActionIconLink href={`${base}/edit`} icon="edit" label="Chỉnh sửa" />
       ) : null}
-    </div>
+    </>
   );
 }
 
@@ -207,14 +204,12 @@ export function MbaListView({ sectionSlug }: { sectionSlug: string }) {
         columns={["Mã", "Tên / mô tả", "Đơn vị", "Ngày", "Trạng thái"]}
         actions="Thao tác"
         actionCells={pageRows.map((record) => (
-          <div key={record.id} style={{ display: "flex", gap: 8, justifyContent: "flex-end", flexWrap: "wrap" }}>
+          <TableActionGroup key={record.id}>
             {actionButtons(section, record)}
             {section.deletePopupCode ? (
-              <Button variant="danger" onClick={() => setDeleteRecordId(record.id)}>
-                Xóa
-              </Button>
+              <ActionIconButton icon="delete" tone="danger" label="Xóa" onClick={() => setDeleteRecordId(record.id)} />
             ) : null}
-          </div>
+          </TableActionGroup>
         ))}
         rows={recordListRows(section, pageRows)}
       />
