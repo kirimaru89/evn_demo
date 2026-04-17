@@ -143,6 +143,14 @@ button {
   opacity: 0.88;
 }
 
+[data-login-page] {
+  padding: 16px;
+}
+
+[data-login-layout] {
+  width: min(420px, 100%);
+}
+
 @media (max-width: 1280px), (max-height: 760px) {
   :root {
     --sidebar-width: 220px;
@@ -165,6 +173,18 @@ button {
 
   [data-shell-sidebar] a {
     padding: 10px 12px !important;
+  }
+
+  [data-login-page] {
+    padding: 18px !important;
+  }
+
+  [data-login-form-card] {
+    padding: 24px !important;
+  }
+
+  [data-login-form-title] {
+    font-size: 24px !important;
   }
 }
 
@@ -245,6 +265,14 @@ button {
     right: 0 !important;
   }
 
+  [data-login-layout] {
+    width: min(420px, 100%) !important;
+  }
+
+  [data-login-form-card] {
+    padding: 22px !important;
+  }
+
   div[style*="grid-template-columns: repeat(2, minmax(0, 1fr))"] {
     grid-template-columns: 1fr !important;
   }
@@ -290,8 +318,14 @@ button {
     padding: 12px !important;
   }
 
-  [data-shell-user] > div:first-child {
-    display: none;
+  [data-shell-user] {
+    gap: 8px !important;
+    align-items: center !important;
+  }
+
+  [data-shell-user-card] {
+    padding: 6px 10px !important;
+    font-size: 13px !important;
   }
 
   [data-shell-notifications] {
@@ -305,6 +339,23 @@ button {
 
   [data-shell-main] {
     padding: 12px !important;
+  }
+
+  [data-login-page] {
+    padding: 12px !important;
+    place-items: stretch !important;
+  }
+
+  [data-login-layout] {
+    width: 100% !important;
+  }
+
+  [data-login-form-card] {
+    padding: 18px !important;
+  }
+
+  [data-login-form-title] {
+    font-size: 22px !important;
   }
 
   button,

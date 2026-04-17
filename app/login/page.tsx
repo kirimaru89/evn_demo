@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Button, ButtonLink } from "@/components/ui/button";
+import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Field, Input } from "@/components/ui/field";
 
@@ -11,63 +11,23 @@ export default function LoginPage() {
 
   return (
     <div
+      data-login-page
       style={{
         minHeight: "100vh",
         display: "grid",
         placeItems: "center",
-        padding: 24,
+        padding: 16,
         background:
           "radial-gradient(circle at top left, rgba(37,99,235,.18), transparent 24%), linear-gradient(180deg, #f8fafc 0%, #edf4ff 100%)"
       }}
     >
-      <div style={{ width: "min(1120px, 100%)", display: "grid", gridTemplateColumns: "1.1fr .9fr", gap: 24 }}>
-        <Card
-          style={{
-            padding: 36,
-            background: "linear-gradient(180deg, #0f172a 0%, #172554 100%)",
-            color: "white",
-            display: "grid",
-            gap: 24
-          }}
-        >
-          <div>
-            <div style={{ fontSize: 14, fontWeight: 700, color: "#93c5fd", textTransform: "uppercase" }}>EVN NPC</div>
-            <h1 style={{ margin: "12px 0 0", fontFamily: "Lexend, sans-serif", fontSize: 34, lineHeight: 1.15 }}>
-              Hệ thống quản lý đa dịch vụ MSM
-            </h1>
-            <p style={{ margin: "12px 0 0", fontSize: 16, color: "rgba(255,255,255,.78)", maxWidth: 560 }}>
-              Cổng làm việc tập trung cho vận hành nghiệp vụ, kiểm soát quy trình và điều phối phê duyệt theo từng phân hệ.
-            </p>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 12 }}>
-            {[
-              "Một ngôn ngữ giao diện thống nhất cho toàn bộ phân hệ",
-              "Tối ưu cho bảng dữ liệu, form nghiệp vụ và quy trình duyệt",
-              "Theo dõi trạng thái hồ sơ, vai trò và audit log rõ ràng",
-              "Thiết kế light enterprise, dễ đọc trong thời gian sử dụng dài"
-            ].map((item) => (
-              <div
-                key={item}
-                style={{
-                  padding: 16,
-                  borderRadius: "var(--radius-lg)",
-                  border: "1px solid rgba(255,255,255,.12)",
-                  background: "rgba(255,255,255,.06)"
-                }}
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-        </Card>
-
-        <Card style={{ padding: 32 }}>
+      <div data-login-layout style={{ width: "min(420px, 100%)" }}>
+        <Card data-login-form-card style={{ padding: 28 }}>
           <div style={{ display: "grid", gap: 20 }}>
             <div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: "var(--color-primary-700)", textTransform: "uppercase" }}>
-                Đăng nhập hệ thống
-              </div>
-              <h2 style={{ margin: "8px 0 0", fontFamily: "Lexend, sans-serif", fontSize: 28 }}>DN-01 Đăng nhập</h2>
+              <div style={{ fontSize: 13, fontWeight: 700, color: "var(--color-primary-700)", textTransform: "uppercase" }}>EVN NPC</div>
+              <h1 data-login-form-title style={{ margin: "8px 0 0", fontFamily: "Lexend, sans-serif", fontSize: 28 }}>Đăng nhập hệ thống</h1>
+              <div style={{ marginTop: 8, fontSize: 14, color: "var(--color-text-muted)" }}>Truy cập cổng MSM bằng tài khoản nội bộ.</div>
             </div>
 
             <div style={{ display: "grid", gap: 16 }}>
