@@ -48,6 +48,8 @@ export function AppShell({
             <Link
               key={module.name}
               href={module.disabled ? "#" : module.href}
+              data-shell-nav-item
+              data-active={isModuleActive(module.href) ? "true" : "false"}
               style={{
                 padding: "12px 14px",
                 borderRadius: "var(--radius-md)",
@@ -56,7 +58,7 @@ export function AppShell({
                 opacity: module.disabled ? 0.6 : 1
               }}
             >
-              <div style={{ fontWeight: 700 }}>{module.name}</div>
+              <div data-shell-nav-title style={{ fontWeight: 700 }}>{module.name}</div>
               <div data-shell-nav-copy style={{ marginTop: 4, fontSize: 12, color: "rgba(255,255,255,.7)" }}>
                 {module.description}
               </div>

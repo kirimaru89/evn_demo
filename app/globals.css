@@ -102,22 +102,48 @@ button {
 
   [data-shell-sidebar] {
     border-right: none !important;
-    border-bottom: 1px solid rgba(148, 163, 184, 0.2);
-    padding: 16px !important;
-    gap: 16px !important;
+    border-bottom: none !important;
+    background: transparent !important;
+    color: var(--color-text) !important;
+    padding: 10px 16px 0 !important;
+    gap: 10px !important;
   }
 
   [data-shell-nav] {
     display: flex !important;
     gap: 8px !important;
     overflow-x: auto;
-    padding-bottom: 4px;
+    padding: 2px 0 8px;
     scrollbar-width: thin;
   }
 
-  [data-shell-nav] a {
-    min-width: 220px;
+  [data-shell-nav-item] {
+    min-width: auto;
     flex: 0 0 auto;
+    background: #ffffff !important;
+    color: var(--color-text) !important;
+    border: 1px solid rgba(148, 163, 184, 0.2) !important;
+    box-shadow: var(--shadow-sm);
+    padding: 10px 12px !important;
+  }
+
+  [data-shell-nav-item][data-active="true"] {
+    background: #dbeafe !important;
+    color: #1d4ed8 !important;
+    border-color: rgba(37, 99, 235, 0.28) !important;
+  }
+
+  [data-shell-nav-title] {
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  [data-shell-nav-copy] {
+    display: none;
+  }
+
+  [data-shell-brand] {
+    display: none;
   }
 
   [data-shell-header] {
@@ -161,32 +187,30 @@ button {
   }
 
   [data-shell-sidebar] {
-    padding: 12px !important;
-    gap: 12px !important;
+    padding: 8px 12px 0 !important;
+    gap: 8px !important;
   }
 
-  [data-shell-brand] {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
+  [data-shell-nav] {
+    gap: 6px !important;
+    padding-bottom: 6px;
   }
 
-  [data-shell-brand-copy] {
-    display: none;
+  [data-shell-nav-item] {
+    padding: 8px 10px !important;
+    border-radius: 999px !important;
   }
 
-  [data-shell-nav] a {
-    min-width: 188px;
-    padding: 9px 11px !important;
-  }
-
-  [data-shell-nav-copy] {
-    display: none;
+  [data-shell-nav-title] {
+    font-size: 12px;
   }
 
   [data-shell-header] {
     padding: 12px !important;
+  }
+
+  [data-shell-user] > div:first-child {
+    display: none;
   }
 
   [data-shell-main] {
